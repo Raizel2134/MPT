@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://product"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  targetNamespace="http://product">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+                   targetNamespace="http://product">
+            <xs:element name="ProductRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="name" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="ProductResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Product" type="tns:Product" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:complexType name="Product">
+                <xs:attribute name="id" type="xs:long"/>
+                <xs:attribute name="name" type="xs:string"/>
+                <xs:attribute name="description" type="xs:string"/>
+                <xs:attribute name="price" type="xs:double"/>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="ProductRequest">
+        <wsdl:part name="ProductRequest" element="tns:ProductRequest">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="ProductResponse">
+        <wsdl:part name="ProductResponse" element="tns:ProductResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="ProductGateway">
+        <wsdl:operation name="Product">
+            <wsdl:input message="tns:ProductRequest" name="ProductRequest"/>
+            <wsdl:output message="tns:ProductResponse" name="ProductResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="ProductGatewaySoap11" type="tns:ProductGateway">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/wsdl/soap/"/>
+            <wsdl:operation name="Product">
+                <soap:operation soapAction="http://product.request"/>
+                <wsdl:input name="ProductRequest">
+                    <soap:body use="literal"/>
+                </wsdl:input>
+                <wsdl:output name="ProductResponse">
+                    <soap:body use="literal"/>
+                </wsdl:output>
+            </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="ProductGateway">
+        <wsdl:port name="ProductGatewaySoap11" binding="tns:ProductGatewaySoap11">
+            <soap:address location="http://127.0.0.1:8080/product"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

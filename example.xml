@@ -1,0 +1,17 @@
+<studio>
+    <group>
+        <album>First</album>
+        <date>24/11/2021</date>
+        <studioName>First studio</studioName>
+    </group>
+    <group>
+        <album>Two</album>
+        <date>10/11/2021</date>
+        <studioName>Two studio</studioName>
+    </group>
+    <group>
+        <album>Three</album>
+        <date>12/11/2021</date>
+        <studioName>Three studio</studioName>
+    </group>
+</studio>

@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Product</title>
+</head>
+<body>
+<div>
+    <div>
+        <h1>Продукты</h1>
+    </div>
+</div>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th scope="col">Наименование</th>
+            <th scope="col">Описание</th>
+            <th scope="col">Цена</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${products.product}">
+            <th class="align-middle" th:text="${product.name}"></th>
+            <th class="align-middle" th:text="${product.description}"></th>
+            <th class="align-middle" th:text="${product.price}"></th>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
